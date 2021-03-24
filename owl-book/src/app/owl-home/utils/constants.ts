@@ -33,7 +33,7 @@ export const books: Array<any> = [
     year: 1958,
     stars: 4,
     liked: true,
-    genreId: 3,
+    genreId: 2,
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In semper, quam vel maximus eleifend, eros ex dignissim sapien, sit amet pretium nulla nisl sollicitudin risus. ',
     id: 1,
@@ -55,7 +55,7 @@ export const books: Array<any> = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In semper, quam vel maximus eleifend, eros ex dignissim sapien, sit amet pretium nulla nisl sollicitudin risus. ',
     id: 2,
-    lastBook: false,
+    lastBook: true,
   },
   {
     author: 'Dante Alighieri',
@@ -68,11 +68,11 @@ export const books: Array<any> = [
     year: 1315,
     stars: 1,
     liked: false,
-    genreId: 3,
+    genreId: 4,
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In semper, quam vel maximus eleifend, eros ex dignissim sapien, sit amet pretium nulla nisl sollicitudin risus. ',
     id: 3,
-    lastBook: false,
+    lastBook: true,
   },
   {
     author: 'Unknown',
@@ -85,7 +85,7 @@ export const books: Array<any> = [
     year: -170,
     stars: 2,
     liked: true,
-    genreId: 3,
+    genreId: 5,
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In semper, quam vel maximus eleifend, eros ex dignissim sapien, sit amet pretium nulla nisl sollicitudin risus. ',
     id: 4,
@@ -102,11 +102,11 @@ export const books: Array<any> = [
     year: -600,
     stars: 3,
     liked: true,
-    genreId: 3,
+    genreId: 2,
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In semper, quam vel maximus eleifend, eros ex dignissim sapien, sit amet pretium nulla nisl sollicitudin risus. ',
     id: 5,
-    lastBook: false,
+    lastBook: true,
   },
   {
     author: 'Unknown',

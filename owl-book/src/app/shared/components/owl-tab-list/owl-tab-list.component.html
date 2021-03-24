@@ -1,1 +1,14 @@
-<p>owl-tab-list works!</p>
+<section>
+  <ul>
+    <li *ngFor="let genre of genres">
+      <button (click)="selectGenre(genre.id)">{{ genre.name }}</button>
+    </li>
+  </ul>
+  <ul>
+    <ng-container *ngFor="let book of books" >
+      <li *ngIf="genreSelected === book.genreId || genreSelected === 1">
+        {{book.title}}
+      </li>
+    </ng-container>
+  </ul>
+</section>

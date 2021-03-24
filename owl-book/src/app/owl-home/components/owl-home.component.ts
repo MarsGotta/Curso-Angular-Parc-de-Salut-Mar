@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { genres, books } from '../utils/constants';
 
 @Component({
@@ -6,16 +6,16 @@ import { genres, books } from '../utils/constants';
   templateUrl: './owl-home.component.html',
   styleUrls: ['./owl-home.component.css'],
 })
-export class OwlHomeComponent implements OnInit {
+export class OwlHomeComponent {
   genres: Array<any> = genres;
   books: Array<any> = books;
   constructor() {}
 
-  ngOnInit(): void {
-    //console.log(this.genres);
+  addBook(book: object): void {
+    this.books.unshift(book);
   }
 
-  addBook(event: any): void {
-    console.log('Soy un evento :', event);
+  deleteBook(id: number) {
+    this.books = this.books.filter((book) => book.id !== id);
   }
 }

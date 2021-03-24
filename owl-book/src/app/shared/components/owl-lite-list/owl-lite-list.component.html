@@ -1,3 +1,15 @@
-<h2>Últimos libros</h2>
-<input type="text" placeholder="Escribe un título" [(ngModel)]="bookTitle" />
-<button (click)="handleAddBook()">Agregar libro</button>
+<section>
+  <h2>Últimos libros</h2>
+  <input type="text" placeholder="Escribe un título" [(ngModel)]="bookTitle" />
+  <button (click)="handleAddBook()">Agregar libro</button>
+  <p *ngIf="showError">
+    Debe rellenar el campo título
+  </p>
+  <ul>
+    <ng-container *ngFor="let book of books" >
+      <li *ngIf="book.lastBook">
+        {{book.title}} - <button (click)="handleDeleteBook(book.id)">Borrar</button>
+      </li>
+    </ng-container>
+  </ul>
+</section>
