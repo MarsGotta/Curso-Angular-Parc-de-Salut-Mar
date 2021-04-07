@@ -7,6 +7,7 @@
   <ul>
     <ng-container *ngFor="let book of books" >
       <li *ngIf="genreSelected === book.genreId || genreSelected === 1">
+        <img [src]="book.src" [alt]="book.title" width="100"/>
         {{book.title}}
       </li>
     </ng-container>
