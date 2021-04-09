@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiBooksService } from 'src/app/core/api-books/api-books.service';
-import { ApiGenresService } from 'src/app/core/api-genres/api-genres.service';
+import { ActivatedRoute } from '@angular/router';
 import { Book } from 'src/app/core/models/book';
 import { Genre } from 'src/app/core/models/genre';
 
@@ -13,25 +12,13 @@ export class OwlHomeComponent implements OnInit {
   genres: Array<Genre> = [];
   books: Array<Book> = [];
   loading: Boolean = false;
-  constructor(
-    private booksApi: ApiBooksService,
-    private genresApi: ApiGenresService
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
-  async ngOnInit(): Promise<void> {
-    try {
-      this.loading = true;
-      const books = await this.booksApi.getBooks();
-      const genres = await this.genresApi.getGenres();
-      this.books = books.map((book: Book) => {
-        return { ...book, src: `assets/${book.src}` };
-      });
+  ngOnInit(): void {
+    this.route.data.subscribe(({ books, genres }) => {
+      this.books = books;
       this.genres = genres;
-    } catch (error) {
-      console.error(error);
-    } finally {
-      this.loading = false;
-    }
+    });
   }
 
   addBook(book: Book): void {

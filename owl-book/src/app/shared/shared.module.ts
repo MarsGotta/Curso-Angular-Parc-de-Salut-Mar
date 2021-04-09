@@ -10,6 +10,7 @@ import { OwlInputComponent } from './components/owl-input/owl-input.component';
 import { OwlRatingComponent } from './components/owl-rating/owl-rating.component';
 import { OwlHeaderComponent } from './components/owl-header/owl-header.component';
 import { OwlNavBarComponent } from './components/owl-nav-bar/owl-nav-bar.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { OwlNavBarComponent } from './components/owl-nav-bar/owl-nav-bar.compone
     OwlHeaderComponent,
     OwlNavBarComponent,
   ],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   exports: [
     OwlTabListComponent,
     OwlItemComponent,

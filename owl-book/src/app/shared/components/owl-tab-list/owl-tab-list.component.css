@@ -1,0 +1,9 @@
+.tab-list {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+}
+
+.tab-list li {
+  padding: 0 10px;
+}
