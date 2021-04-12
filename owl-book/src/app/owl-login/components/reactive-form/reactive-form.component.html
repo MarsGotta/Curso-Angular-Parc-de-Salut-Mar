@@ -1,2 +1,48 @@
-<p>reactive-form works!</p>
-<button routerLink="../">Ir a ruta plantilla</button>
+<main>
+  <h3>Registrate - Formulario reactive</h3>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <section formGroupName="fullName">
+      <label for="firstName">Nombre</label>
+      <input type="text" formControlName="firstName">
+      <ng-container *ngIf="myForm.fullName.get('firstName')?.dirty || myForm.fullName.get('firstName')?.touched">
+        <p *ngIf="myForm.fullName.get('firstName')?.errors?.required">
+          Escribe tu nombre
+        </p>
+        <p *ngIf="myForm.fullName.get('firstName')?.errors?.minlength">
+          Tu nombre debe tener al menos 2 caracteres.
+        </p>
+        <p *ngIf="myForm.fullName.get('firstName')?.errors?.pattern">
+          Tu nombre no puede tener caracteres especiales
+        </p>
+      </ng-container>
+    </section>
+    <section>
+      <label for="email">Correo electrónico</label>
+      <input type="email" formControlName="email">
+      <ng-container *ngIf="myForm.email.dirty || myForm.email.touched">
+        <p *ngIf="myForm.email.errors?.required">
+          Escribe tu correo electrónico
+        </p>
+        <p *ngIf="myForm.email.errors?.email">
+          Por favor escribe un correo electrónico válido
+        </p>
+      </ng-container>
+    </section>
+    <section>
+      <label for="phoneNumber">Teléfono</label>
+      <input type="phoneNumber" formControlName="phoneNumber">
+      <ng-container *ngIf="myForm.phoneNumber.dirty || myForm.phoneNumber.touched">
+        <p *ngIf="myForm.phoneNumber.errors?.required">
+          Escribe tu teléfono
+        </p>
+        <p *ngIf="myForm.phoneNumber.errors?.maxlength">
+          El teléfono debe tener máximo 10 caracteres
+        </p>
+        <p *ngIf="myForm.phoneNumber.errors?.pattern">
+          Por favor escribe un teléfono válido
+        </p>
+      </ng-container>
+    </section>
+  </form>
+</main>
+<button routerLink="../">Ir a iniciar sesión</button>

@@ -14,7 +14,7 @@ const routes: Routes = [
         component: TemplateFormComponent,
       },
       {
-        path: 'reactive',
+        path: 'register',
         component: ReactiveFormComponent,
       },
     ],

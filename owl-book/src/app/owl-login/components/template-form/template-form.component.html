@@ -1,3 +1,113 @@
-<p>template-form works!</p>
+<main>
+  <h3>Iniciar sesión - Formulario de template</h3>
+  <form #OwlLoginForm="ngForm" (ngSubmit)="submit(OwlLoginForm.value)">
+    <label for="email">Correo electrónico</label>
+    <input
+      type="email"
+      #email="ngModel"
+      name="email"
+      required
+      placeholder="Introduce tu correo electrónico"
+      [(ngModel)]="login.email"
+      [ngClass]="{'is-valid': !email.invalid && (email.dirty || email.touched), 'is-invalid': email.invalid&& (email.dirty || email.touched)}"
+      pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+    />
+    <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+      <p class="error-mssg" *ngIf="email.errors?.required">
+        Introduce un correo electronico
+      </p>
+      <p class="error-mssg" *ngIf="email.errors?.pattern">
+        El correo electrónico no sigue el formato correcto. Sigue este ejemplo: demo@dominio.com. {{email.value}}
+      </p>
+    </ng-container>
+    <section *ngIf="!showForgotPass">
+      <label for="password">Contraseña</label>
+      <input
+        type="password"
+        placeholder="Escribe tu contraseña"
+        #password="ngModel"
+        name="password"
+        [(ngModel)]="login.password"
+        required
+        [ngClass]="{'is-valid': !password.invalid && (password.dirty || password.touched), 'is-invalid': password.invalid && (password.dirty || password.touched)}"
+      >
+      <ng-container *ngIf="password.invalid && (password.dirty || password.touched)">
+        <p *ngIf="password.errors?.required">
+          Introduzca una contraseña por favor
+        </p>
+      </ng-container>
+    </section>
 
-<button routerLink="reactive">Ir a ruta reactiva</button>
+    <section *ngIf="showForgotPass">
+      <article>
+        <label for="securityQuestion">Nombre de tu primera mascota</label>
+        <input
+          type="text"
+          placeholder="Escribe la pregunta de seguridad"
+          name="securityQuestion"
+          #securityQuestion="ngModel"
+          [(ngModel)]="login.securityQuestion"
+          [ngClass]="{'is-valid': !securityQuestion.invalid && (securityQuestion.dirty || securityQuestion.touched), 'is-invalid': securityQuestion.invalid && (securityQuestion.dirty || securityQuestion.touched)}"
+          required
+        >
+        <ng-container *ngIf="securityQuestion.invalid && (securityQuestion.dirty || securityQuestion.touched)">
+          <p *ngIf="securityQuestion.errors?.required">
+            Introduzca la pregunta de seguridad por favor
+          </p>
+        </ng-container>
+      </article>
+      <article>
+        <label for="newPassword">Nueva contraseña</label>
+        <input
+          type="password"
+          placeholder="Escribe una nueva contraseña"
+          name="newPassword"
+          #newPassword="ngModel"
+          [(ngModel)]="login.newPassword"
+          (ngModelChange)="validateEqualPass()"
+          [ngClass]="{'is-valid': !newPassword.invalid && (newPassword.dirty || newPassword.touched), 'is-invalid': newPassword.invalid && (newPassword.dirty || newPassword.touched)}"
+          required
+        >
+        <ng-container *ngIf="newPassword.invalid && (newPassword.dirty || newPassword.touched)">
+          <p *ngIf="newPassword.errors?.required">
+            Introduzca una nueva contraseña por favor
+          </p>
+        </ng-container>
+      </article>
+      <article>
+        <label for="repeatPass">Repite la nueva contraseña</label>
+        <input
+          type="password"
+          placeholder="Repite la contraseña"
+          name="repeatPass"
+          #repeatPass="ngModel"
+          [(ngModel)]="login.repeatPass"
+          [ngClass]="{'is-valid': !repeatPass.invalid && (repeatPass.dirty || repeatPass.touched), 'is-invalid': repeatPass.invalid && (repeatPass.dirty || repeatPass.touched)}"
+          (ngModelChange)="validateEqualPass()"
+          required
+        >
+        <ng-container *ngIf="repeatPass.invalid && (repeatPass.dirty || repeatPass.touched)">
+          <p *ngIf="repeatPass.errors?.required">
+            Repita una nueva contraseña por favor
+          </p>
+        </ng-container>
+      </article>
+    </section>
+
+    <div style="padding: 10px 0;">
+      <button type="submit" [disabled]="!OwlLoginForm.valid || (!equalPassword && showForgotPass)">Iniciar sesión</button>
+      <p *ngIf="!equalPassword && (OwlLoginForm.dirty || OwlLoginForm.touched)">
+        Hay que introducir dos contraseñas iguales
+      </p>
+    </div>
+  </form>
+  <button style="display: block;" (click)="showForgotPass = !showForgotPass">
+    <span *ngIf="!showForgotPass">
+      Has olvidado tu contraseña?
+    </span>
+    <span *ngIf="showForgotPass">
+      Regresa a iniciar sesión
+    </span>
+  </button>
+  <a routerLink="register">No tienes usuario? Registrate</a>
+</main>
