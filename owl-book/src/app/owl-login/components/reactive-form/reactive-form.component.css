@@ -1,0 +1,25 @@
+.groups {
+  border: 1px solid black;
+}
+
+section,
+article {
+  padding: 5px;
+}
+
+label {
+  margin-right: 10px;
+}
+
+.invalid {
+  color: red;
+}
+
+h4,
+p {
+  margin: 0;
+}
+
+#imagePreview {
+  height: 300px;
+}

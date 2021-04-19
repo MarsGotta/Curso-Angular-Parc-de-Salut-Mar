@@ -1,24 +1,45 @@
 <main>
   <h3>Registrate - Formulario reactive</h3>
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-    <section formGroupName="fullName">
-      <label for="firstName">Nombre</label>
-      <input type="text" formControlName="firstName">
-      <ng-container *ngIf="myForm.fullName.get('firstName')?.dirty || myForm.fullName.get('firstName')?.touched">
-        <p *ngIf="myForm.fullName.get('firstName')?.errors?.required">
-          Escribe tu nombre
-        </p>
-        <p *ngIf="myForm.fullName.get('firstName')?.errors?.minlength">
-          Tu nombre debe tener al menos 2 caracteres.
-        </p>
-        <p *ngIf="myForm.fullName.get('firstName')?.errors?.pattern">
-          Tu nombre no puede tener caracteres especiales
-        </p>
-      </ng-container>
+    <section>
+      <h4>Avatar</h4>
+      <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="updloadFile($event)">
+      <article>
+        <label for="imageUpload" *ngIf="editFile">Editar avatar</label>
+        <label *ngIf="removeUpdload" (click)="removeUpdloadFile()">Borrar avatar</label>
+      </article>
+      <div id="imagePreview" *ngIf="imageUrl" [style.backgroundImage]="'url('+ imageUrl +')'"></div>
+    </section>
+    <section class="groups" formGroupName="fullName">
+      <h4>Nombre completo</h4>
+      <article>
+        <label for="firstName">Nombre</label>
+        <input type="text" name="firstName" formControlName="firstName">
+        <ng-container *ngIf="myForm.fullName.get('firstName')?.dirty || myForm.fullName.get('firstName')?.touched">
+          <p *ngIf="myForm.fullName.get('firstName')?.errors?.required">
+            Escribe tu nombre
+          </p>
+          <p *ngIf="myForm.fullName.get('firstName')?.errors?.minlength">
+            Tu nombre debe tener al menos 2 caracteres.
+          </p>
+          <p *ngIf="myForm.fullName.get('firstName')?.errors?.pattern">
+            Tu nombre no puede tener caracteres especiales
+          </p>
+        </ng-container>
+      </article>
+      <article>
+        <label for="lastName">Apellidos</label>
+        <input type="text" name="lastName" formControlName="lastName">
+        <ng-container *ngIf="myForm.fullName.get('lastName')?.dirty || myForm.fullName.get('lastName')?.touched">
+          <p *ngIf="myForm.fullName.get('lastName')?.errors?.required">
+            Escribe tus apellidos
+          </p>
+        </ng-container>
+      </article>
     </section>
     <section>
       <label for="email">Correo electrónico</label>
-      <input type="email" formControlName="email">
+      <input type="email" name="email" formControlName="email">
       <ng-container *ngIf="myForm.email.dirty || myForm.email.touched">
         <p *ngIf="myForm.email.errors?.required">
           Escribe tu correo electrónico
@@ -30,7 +51,7 @@
     </section>
     <section>
       <label for="phoneNumber">Teléfono</label>
-      <input type="phoneNumber" formControlName="phoneNumber">
+      <input type="text" name="phoneNumber" formControlName="phoneNumber">
       <ng-container *ngIf="myForm.phoneNumber.dirty || myForm.phoneNumber.touched">
         <p *ngIf="myForm.phoneNumber.errors?.required">
           Escribe tu teléfono
@@ -42,6 +63,83 @@
           Por favor escribe un teléfono válido
         </p>
       </ng-container>
+    </section>
+    <section formGroupName="address">
+      <h4>Dirección</h4>
+      <article>
+        <label for="street">Calle</label>
+        <input type="text" name="street" formControlName="street">
+        <ng-container *ngIf="myForm.address.get('street')?.dirty || myForm.address.get('street')?.touched">
+          <p *ngIf="myForm.address.get('street')?.errors?.required">
+            Escribe tu calle
+          </p>
+        </ng-container>
+      </article>
+      <article>
+        <label for="city">Ciudad</label>
+        <input type="type" name="city" formControlName="city">
+      </article>
+      <ng-container *ngIf="myForm.address.get('city')?.dirty || myForm.address.get('city')?.touched">
+        <p *ngIf="myForm.address.get('city')?.errors?.required">
+          Escribe tu ciudad
+        </p>
+      </ng-container>
+      <article>
+        <label for="country">País</label>
+        <select name="country" formControlName="country" (change)="changeCountry($event)">
+          <option value="">Elige un país</option>
+          <option *ngFor="let country of countries" [ngValue]="country">{{country}}</option>
+        </select>
+        <ng-container *ngIf="myForm.address.get('country')?.dirty || myForm.address.get('country')?.touched">
+          <p *ngIf="myForm.address.get('country')?.errors?.required">
+            Escribe tu país
+          </p>
+        </ng-container>
+      </article>
+    </section>
+    <section>
+      <h4>Género</h4>
+        <input type="radio" name="gender" formControlName="gender" value="male" id="male">
+        <label for="male">Hombre</label>
+        <input type="radio" name="gender" formControlName="gender" value="female" id="female">
+        <label for="female">Mujer</label>
+        <input type="radio" name="gender" formControlName="gender" value="other" id="other">
+        <label for="other">Otro</label>
+        <ng-container *ngIf="myForm.gender?.dirty || myForm.gender?.touched">
+          <p *ngIf="myForm.gender?.errors?.required">
+            Elige tu género
+          </p>
+        </ng-container>
+    </section>
+    <section formGroupName="passwordValidation">
+      <h4>Valida tu contraseña</h4>
+      <article>
+        <label for="password">Contraseña</label>
+        <input type="password" name="password" formControlName="password">
+        <ng-container *ngIf="myForm.passwordValidation.get('password')?.dirty || myForm.passwordValidation.get('password')?.touched">
+          <p *ngIf="myForm.passwordValidation.get('password')?.errors?.required">
+            Escribe una contraseña
+          </p>
+        </ng-container>
+      </article>
+      <article>
+        <label for="password">Confirma la contraseña</label>
+        <input type="password" name="confirmPassword" formControlName="confirmPassword">
+        <ng-container *ngIf="myForm.passwordValidation.get('confirmPassword')?.dirty || myForm.passwordValidation.get('confirmPassword')?.touched">
+          <p *ngIf="myForm.passwordValidation.get('confirmPassword')?.errors?.required">
+            Escribe la contraseña nuevamente
+          </p>
+        </ng-container>
+      </article>
+    </section>
+    <section formArrayName="addDynamicElement">
+      <h4>Agrega una nueva skill</h4>
+      <button (click)="addSkill()">Agregar</button>
+      <ul>
+        <li *ngFor="let item of addDynamicElement.controls; let i = index">
+          <input type="text" [formControlName]="i">
+        </li>
+      </ul>
     </section>
   </form>
 </main>
