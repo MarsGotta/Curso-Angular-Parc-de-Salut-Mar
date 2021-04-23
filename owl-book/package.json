@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "serve": "json-server --watch db.json --port 4444"
   },
   "private": true,
   "dependencies": {
@@ -42,6 +43,7 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.1.5"
+    "typescript": "~4.1.5",
+    "json-server": "^0.16.3"
   }
 }

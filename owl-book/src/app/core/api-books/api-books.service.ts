@@ -5,7 +5,7 @@ import { genres, books } from '../../owl-home/utils/constants';
   providedIn: 'root',
 })
 export class ApiBooksService {
-  apiURL: string = 'https://api.mocki.io/v1/569c937c';
+  apiURL: string = 'http://localhost:4444/books';
 
   async getBooks(): Promise<any> {
     try {

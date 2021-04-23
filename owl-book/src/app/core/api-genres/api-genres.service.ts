@@ -5,7 +5,7 @@ import { Genre } from '../models/genre';
   providedIn: 'root',
 })
 export class ApiGenresService {
-  apiURL: string = 'https://api.mocki.io/v1/50f7f3ef';
+  apiURL: string = 'http://localhost:4444/genres';
 
   async getGenres(): Promise<Genre[]> {
     try {
